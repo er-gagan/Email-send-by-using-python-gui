@@ -1,4 +1,8 @@
 from tkinter import *
+from emailSend import *
+import urllib
+from urllib.request import urlopen
+from tkinter.messagebox import *
 
 root=Tk()
 root.geometry("750x458")
@@ -28,11 +32,22 @@ def Clear():
     t1.insert(END,"Enter message")
     t1.bind("<FocusIn>",lambda args: t1.delete("1.0",END))
 
+def CheckInternet():
+    try:
+        urlopen("https://www.google.com/")
+        return True
+    except urllib.error.URLError as Error:
+        return False
+
 def Send():
-    emailVar = EmailVar.get()
-    subjectVar = SubjectVar.get()
-    Msg = t1.get('1.0',END)
-    print(emailVar,subjectVar,Msg)
+    if CheckInternet():
+        emailVar = EmailVar.get()
+        subjectVar = SubjectVar.get()
+        Msg = t1.get('1.0',END)
+        EmailSend(emailVar,subjectVar,Msg)
+        showinfo("Email Sent","Your Email Has Successfully Sent..")
+    else:
+        showerror("Error","Your System is not connect to the internet")
 
 Label(root,text="Email",font=("Calibri",25),width=8).place(x=100,y=40)
 e1 = Entry(root,font=("Calibri",25),width=25,bd=10,textvariable=EmailVar)

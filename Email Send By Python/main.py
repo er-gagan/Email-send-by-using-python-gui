@@ -2,6 +2,7 @@ from tkinter import *
 import urllib
 from urllib.request import urlopen
 from tkinter.messagebox import *
+from emailSend import *
 
 root=Tk()
 root.geometry("750x458")
@@ -43,7 +44,8 @@ def Send():
         emailVar = EmailVar.get()
         subjectVar = SubjectVar.get()
         Msg = t1.get('1.0',END)
-        print(emailVar,subjectVar,Msg)
+        emailData(emailVar,subjectVar,Msg)
+        showinfo("Email sent","You email has successfully sent...")
     else:
         showerror("Error","Your system is not connected to the internet")
 

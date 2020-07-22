@@ -17,7 +17,7 @@ def emailData(emailVar,subjectVar,Msg):
     text=msg.as_string()
     server=smtplib.SMTP('smtp.gmail.com',587)
     server.starttls()
-    server.login(email_user,'AAA111...1')
+    server.login(email_user,'Enter Password')
     server.sendmail(email_user,email_send,text)
     server.quit()
     
